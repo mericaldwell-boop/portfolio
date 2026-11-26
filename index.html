@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meri Caldwell — Creative Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0c0b;
+      --surface: #161614;
+      --surface2: #1e1e1b;
+      --text: #f0ede6;
+      --muted: #7a7770;
+      --accent: #c47a4a;
+      --accent-soft: rgba(196, 122, 74, 0.12);
+      --accent-border: rgba(196, 122, 74, 0.28);
+      --border: #232320;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(12, 12, 11, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      z-index: 200;
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 140px 48px 96px;
+      max-width: 1000px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 400;
+      line-height: 1.08;
+      margin-bottom: 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(240, 237, 230, 0.68);
+      max-width: 660px;
+      line-height: 1.85;
+      margin-bottom: 44px;
+    }
+
+    .hero-bio strong {
+      color: rgba(240, 237, 230, 0.9);
+      font-weight: 400;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 88px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      margin-bottom: 52px;
+    }
+
+    .section-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: -32px;
+      margin-bottom: 48px;
+      margin-left: 46px;
+    }
+
+    /* ─── GRID ─── */
+    .work-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .cols-2 { grid-template-columns: 1fr 1fr; }
+    .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+    .span-5 { grid-column: span 5; }
+    .span-7 { grid-column: span 7; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+
+    .mb-16 { margin-bottom: 16px; }
+    .mb-32 { margin-bottom: 32px; }
+    .mb-52 { margin-bottom: 52px; }
+
+    /* ─── WORK ITEM ─── */
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      background: var(--surface);
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .work-item:hover img { transform: scale(1.04); }
+
+    .work-item.logo-bg {
+      background: #f8f7f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10%;
+    }
+
+    .work-item.logo-bg img {
+      object-fit: contain;
+      max-height: 160px;
+    }
+
+    .work-item.design-bg {
+      background: #f5f4f1;
+    }
+
+    .work-item.design-bg img {
+      object-fit: contain;
+      padding: 7%;
+    }
+
+    .ar-landscape { aspect-ratio: 16/9; }
+    .ar-4-3       { aspect-ratio: 4/3; }
+    .ar-3-4       { aspect-ratio: 3/4; }
+    .ar-square    { aspect-ratio: 1; }
+    .ar-5-6       { aspect-ratio: 5/6; }
+    .ar-tall      { aspect-ratio: 2/3; }
+
+    .work-label {
+      margin-top: 12px;
+      padding-bottom: 4px;
+    }
+
+    .work-label .title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .work-label .meta {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* col stack helper */
+    .col-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .col-stack .work-item { flex: 1; }
+
+    /* ─── CLIENT BLOCKS ─── */
+    .client-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .client-tag::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .client-block + .client-block {
+      padding-top: 60px;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    /* 4-col design gallery */
+    .design-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .design-grid-4 .work-item.design-bg img {
+      padding: 2%;
+    }
+
+    /* ─── AI EVALUATION ─── */
+    .eval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .eval-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px;
+    }
+
+    .eval-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .role-pill {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .eval-card p {
+      font-size: 14px;
+      color: rgba(240, 237, 230, 0.6);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .eval-list {
+      list-style: none;
+    }
+
+    .eval-list li {
+      font-size: 13px;
+      color: rgba(240, 237, 230, 0.6);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eval-list li:last-child { border-bottom: none; }
+
+    .eval-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* highlight note */
+    .highlight-note {
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 4px 4px 0;
+      font-size: 14px;
+      color: rgba(240, 237, 230, 0.7);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* ─── TOOLS ─── */
+    .tools-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tool-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      color: rgba(240, 237, 230, 0.65);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 44px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer span:last-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 80px 20px 60px; }
+      section { padding: 60px 20px; }
+      .section-desc { margin-left: 0; }
+      .cols-2, .cols-3, .eval-grid { grid-template-columns: 1fr; }
+      .cols-12 { grid-template-columns: 1fr 1fr; }
+      .span-5, .span-7, .span-4, .span-6, .span-8 { grid-column: span 2; }
+      .design-grid-4 { grid-template-columns: 1fr 1fr; }
+      .client-block + .client-block { padding-top: 40px; margin-top: 40px; }
+      footer { padding: 32px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-name">Meri Caldwell</div>
+    <ul class="nav-links">
+      <li><a href="#commercial">Commercial</a></li>
+      <li><a href="#fineart">Fine Art</a></li>
+      <li><a href="#evaluation">AI Evaluation</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="eyebrow">Creative Portfolio — 2026</div>
+    <h1>Designer.<br><em>Visual Artist.</em><br>AI Evaluator.</h1>
+    <p class="hero-bio">
+      I bring <strong>15+ years</strong> of professional creative practice across brand identity,
+      apparel design, e-commerce, fine art, and visual education. I run two design-driven businesses —
+      <strong>Sail &amp; Seek Studio</strong> (cruise &amp; travel apparel on Etsy) and
+      <strong>Aviation Motivation</strong> on Shopify — and I bring the same detail-first
+      discipline to evaluating AI creative output that I bring to making it myself.
+    </p>
+    <div class="tags">
+      <span class="tag">Brand Identity</span>
+      <span class="tag">Apparel Design</span>
+      <span class="tag">E-commerce</span>
+      <span class="tag">Illustration</span>
+      <span class="tag">Acrylic Painting</span>
+      <span class="tag">Pattern &amp; Texture</span>
+      <span class="tag">Visual Education</span>
+      <span class="tag">AI Evaluation</span>
+      <span class="tag">Rubric Writing</span>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 1: COMMERCIAL ═══ -->
+  <section id="commercial">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Commercial Work</h2>
+    </div>
+    <p class="section-desc">
+      Brand identity, apparel design, e-commerce, and marketing — delivered for real clients
+      and built into live, revenue-generating businesses.
+    </p>
+
+    <!-- ── Joyce James Agency ── -->
+    <div class="client-block">
+      <div class="client-tag">Joyce James Agency — Brand Identity</div>
+      <div class="work-grid cols-2">
+        <div>
+          <div class="work-item logo-bg ar-4-3">
+            <img src="img/logo.png" alt="Joyce James Agency logo — custom JJA monogram in charcoal and steel blue">
+          </div>
+          <div class="work-label">
+            <div class="title">Joyce James Agency</div>
+            <div class="meta">Logo &amp; Wordmark Design — Custom monogram mark, dual-tone identity system</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; padding: 8px 0 0 8px;">
+          <div>
+            <p style="font-size:15px; font-weight:300; color:rgba(240,237,230,0.6); line-height:1.85; margin-bottom:18px;">
+              Full brand identity system for a professional services agency — primary mark,
+              typographic wordmark, and icon system. The monogram combines an angular A letterform
+              with rounded J brackets to signal both authority and approachability.
+            </p>
+            <div class="tags">
+              <span class="tag">Logo Design</span>
+              <span class="tag">Brand System</span>
+              <span class="tag">Typography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Sail & Seek Studio ── -->
+    <div class="client-block">
+      <div class="client-tag">Sail &amp; Seek Studio — Full Brand System &amp; Product Line</div>
+
+      <!-- Brand banner full-width -->
+      <div class="work-grid mb-16">
+        <div>
+          <div class="work-item design-bg ar-landscape">
+            <img src="img/ss-banner.webp" alt="Sail &amp; Seek Studio brand banner — cruise ship, retro sunset, ocean waves, dashed treasure trail">
+          </div>
+          <div class="work-label">
+            <div class="title">Sail &amp; Seek Studio — Brand Identity</div>
+            <div class="meta">Logo, wordmark &amp; banner — Etsy cruise &amp; travel apparel brand</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo + 2 shirt designs -->
+      <div class="work-grid cols-3 mb-16">
+        <div>
+          <div class="work-item ar-square" style="background:#f1ede4; overflow:hidden;">
+            <img src="img/ss-logo.png" alt="Sail &amp; Seek Studio circular badge logo — retro cruise ship, teal ocean, dashed treasure X" style="object-fit:contain; padding:8%; width:100%; height:100%;">
+          </div>
+          <div class="work-label">
+            <div class="title">S&amp;S Studio Badge Mark</div>
+            <div class="meta">Circular badge logo — Retro cruise aesthetic, custom illustration</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/ss-girls-trip.webp" alt="Girls Trip — Symphony of the Seas 2027 shirt design with named beach chairs, monkey mascot, retro sunset">
+          </div>
+          <div class="work-label">
+            <div class="title">Girls Trip — Symphony of the Seas</div>
+            <div class="meta">Personalized apparel — Custom names, retro sunset, illustrated beach chairs</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/ss-anniversary.webp" alt="Anniversary Cruise shirt design — deck chairs, champagne, heart-shaped sunset, The Smith's banner">
+          </div>
+          <div class="work-label">
+            <div class="title">Anniversary Cruise</div>
+            <div class="meta">Personalized apparel — Romantic watercolor illustration, custom name banner</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Family cruise shirt mockup -->
+      <div class="work-grid mb-16">
+        <div>
+          <div class="work-item ar-4-3">
+            <img src="img/ss-shirt-white.jpg" alt="Family Cruise 2027 — styled flat-lay mockup, retro sunset circle design with palm trees and cruise ship">
+          </div>
+          <div class="work-label">
+            <div class="title">Family Cruise 2027</div>
+            <div class="meta">Personalized apparel · Retro sunset illustration, palm trees, cruise ship · Available in 7 colorways</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cruise Crew + Girls Trip badge -->
+      <div class="work-grid cols-2 mb-16">
+        <div>
+          <div class="work-item ar-4-3" style="background:#f5f4f1; overflow:hidden;">
+            <img src="img/ss-cruise-crew.webp" alt="Cruise Crew Loading shirt design — loading bar, cruise ship, The Smith Family Cruise 2027" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+          </div>
+          <div class="work-label">
+            <div class="title">Cruise Crew Loading</div>
+            <div class="meta">Illustrated apparel — Loading bar concept, personalized family name</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item ar-4-3" style="background:#fff;">
+            <img src="img/ss-girls-badge.webp" alt="Girls Trip Cruise 2027 — rope-border badge with beach chairs, starfish, ship wheel, nautical elements" style="object-fit:contain; padding:5%;">
+          </div>
+          <div class="work-label">
+            <div class="title">Girls Trip Badge</div>
+            <div class="meta">Badge/patch design — Nautical rope border, hand-illustrated elements</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Door kits full-width -->
+      <div class="work-grid">
+        <div>
+          <div class="work-item design-bg ar-landscape">
+            <img src="img/ss-door-kits2.jpg" alt="Sail &amp; Seek Studio cruise cabin door decoration kits — 4 theme sets: Cruise Crew Loading, Girls Trip, Family Cruise, Girls Trip Badge">
+          </div>
+          <div class="work-label">
+            <div class="title">Cruise Cabin Door Decoration Kits</div>
+            <div class="meta">Digital product line — 4 coordinated theme sets, each with 4-piece decor system · Etsy digital download</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Aviation Motivation ── -->
+    <div class="client-block">
+      <div class="client-tag">Aviation Motivation — E-commerce &amp; Apparel Design</div>
+
+      <!-- AM brand campaign -->
+      <div class="work-grid mb-16">
+        <div>
+          <div class="work-item ar-landscape">
+            <img src="img/am-lifestyle.webp" alt="Built for Pilots — Aviation Motivation brand campaign, lifestyle hangar shoot with apparel" style="object-position: top;">
+          </div>
+          <div class="work-label">
+            <div class="title">Aviation Motivation — Brand Campaign</div>
+            <div class="meta">Lifestyle photography &amp; brand direction — aviationmotivation.store</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIT Adams Field apparel -->
+      <div class="work-grid cols-2 mb-16">
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-lit-badge.webp" alt="LIT Adams Field — Little Rock Intermediate Air Depot, Est. 1917, detailed illustrated aviation badge">
+          </div>
+          <div class="work-label">
+            <div class="title">LIT Adams Field</div>
+            <div class="meta">Illustrated badge apparel — Multi-element composition, type, iconography</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; padding: 8px 0 0 8px;">
+          <div>
+            <p style="font-size:15px; font-weight:300; color:rgba(240,237,230,0.6); line-height:1.85; margin-bottom:18px;">
+              Airport-specific badge designs built for pilots and aviation enthusiasts — each shirt features a custom illustrated badge for a unique airfield, blending layered typography, iconography, and hand-crafted composition.
+            </p>
+            <div class="tags">
+              <span class="tag">Badge Design</span>
+              <span class="tag">Illustrated Apparel</span>
+              <span class="tag">Typography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design gallery: 4-col × 2 rows (8 designs) -->
+      <div class="design-grid-4 mb-16">
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-retired-pilot2.webp" alt="Retired Pilot — Victorian ornamental gold design with biplane, Retired But Never Grounded">
+          </div>
+          <div class="work-label">
+            <div class="title">Retired Pilot</div>
+            <div class="meta">Victorian ornamental type &amp; illustration</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-scattering-clouds.webp" alt="Scattering Clouds, Gathering Altitude — vintage script and slab type with airplane">
+          </div>
+          <div class="work-label">
+            <div class="title">Scattering Clouds, Gathering Altitude</div>
+            <div class="meta">Vintage script &amp; woodblock type</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-throttle-therapy.webp" alt="Throttle Therapy — retro sunset circle badge with airplane and mountain landscape">
+          </div>
+          <div class="work-label">
+            <div class="title">Throttle Therapy</div>
+            <div class="meta">Retro badge · sunset / mountain illustration</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-pilot-wife2.webp" alt="Pilot Wife — Meet Me at Arrivals · illustrated sunset runway, dripping heart, expressive type">
+          </div>
+          <div class="work-label">
+            <div class="title">Pilot Wife — Meet Me at Arrivals</div>
+            <div class="meta">Illustrated · sunset runway, expressive type</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="design-grid-4">
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-always-north.webp" alt="Always Find Your North — engraved compass rose with runway, Aviation Motivation wordmark">
+          </div>
+          <div class="work-label">
+            <div class="title">Always Find Your North</div>
+            <div class="meta">Engraving-style illustration, compass &amp; runway</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item ar-square">
+            <img src="img/am-amelia.webp" alt="Amelia Earhart Aviation Pioneer — vintage badge on purple shirt back">
+          </div>
+          <div class="work-label">
+            <div class="title">Amelia Earhart — Aviation Pioneer</div>
+            <div class="meta">Vintage badge · product mockup on shirt</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item ar-square">
+            <img src="img/am-wander-shirt.webp" alt="Not All Who Wander Are Lost — Some Are In The Pattern · compass design on white shirt">
+          </div>
+          <div class="work-label">
+            <div class="title">Not All Who Wander Are Lost</div>
+            <div class="meta">Compass illustration · distressed stamp badge</div>
+          </div>
+        </div>
+        <div>
+          <div class="work-item design-bg ar-square">
+            <img src="img/am-pilot-mom-patch2.webp" alt="Pilot Mom — My Heart Flies With You · embroidered patch design, circular badge with airplane flight path and heart">
+          </div>
+          <div class="work-label">
+            <div class="title">Pilot Mom — My Heart Flies With You</div>
+            <div class="meta">Embroidered patch design, fabric texture</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ SECTION 2: FINE ART ═══ -->
+  <section id="fineart">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Fine Art &amp; Illustration</h2>
+    </div>
+    <p class="section-desc">
+      Original works in acrylic, pen, and colored pencil — spanning abstract painting, botanical
+      illustration, decorative pattern, and figurative drawing.
+    </p>
+
+    <!-- Row A: big paintings -->
+    <div class="work-grid cols-2 mb-16">
+      <div>
+        <div class="work-item ar-4-3">
+          <img src="img/botanicals.jpg" alt="Botanical acrylic series — four folk-art floral paintings">
+        </div>
+        <div class="work-label">
+          <div class="title">Botanical Series (four works)</div>
+          <div class="meta">Acrylic on canvas — Original works, folk-art floral</div>
+        </div>
+      </div>
+      <div>
+        <div class="work-item ar-4-3">
+          <img src="img/mandala.jpg" alt="Mandala spiral acrylic — intricate multicolor pattern">
+        </div>
+        <div class="work-label">
+          <div class="title">Mandala Spiral</div>
+          <div class="meta">Acrylic on canvas — Original work, complex pattern</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row B: mixed media + illustration -->
+    <div class="work-grid cols-12 mb-16">
+      <div class="span-5">
+        <div class="work-item ar-3-4">
+          <img src="img/dress.jpg" alt="Mandala ballgown illustration — intricate pattern dress figure">
+        </div>
+        <div class="work-label">
+          <div class="title">Mandala Ballgown</div>
+          <div class="meta">Pen &amp; colored pencil — Sketchbook, pattern-intensive figurative</div>
+        </div>
+      </div>
+      <div class="span-7">
+        <div class="col-stack" style="height: 100%;">
+          <div>
+            <div class="work-item ar-4-3">
+              <img src="img/abstract-acrylic.jpg" alt="Abstract mixed-media acrylic — botanical mark-making">
+            </div>
+            <div class="work-label">
+              <div class="title">Abstract Botanical</div>
+              <div class="meta">Acrylic &amp; ink — Mixed media, framed original</div>
+            </div>
+          </div>
+          <div>
+            <div class="work-item ar-4-3">
+              <img src="img/feather.jpg" alt="Zentangle feather — detailed colored pencil illustration">
+            </div>
+            <div class="work-label">
+              <div class="title">Zentangle Feather</div>
+              <div class="meta">Pen &amp; colored pencil — Sketchbook, decorative illustration</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row C: canvas + rock -->
+    <div class="work-grid cols-3 mb-52">
+      <div>
+        <div class="work-item ar-3-4">
+          <img src="img/dna.jpg" alt="DNA atom canvas — scientific illustration meets fine art">
+        </div>
+        <div class="work-label">
+          <div class="title">DNA × Atom</div>
+          <div class="meta">Acrylic on canvas — Technical illustration, original</div>
+        </div>
+      </div>
+      <div>
+        <div class="work-item ar-square">
+          <img src="img/toucan.jpg" alt="Toucan rock painting — fine detail acrylic on stone">
+        </div>
+        <div class="work-label">
+          <div class="title">Toucan</div>
+          <div class="meta">Acrylic on stone — Fine detail painting</div>
+        </div>
+      </div>
+      <div>
+        <div class="work-item ar-3-4">
+          <img src="img/ps-commission.jpg" alt="PlayStation controller commission painting — custom for Ayden">
+        </div>
+        <div class="work-label">
+          <div class="title">Custom Commission — "Ayden"</div>
+          <div class="meta">Acrylic on canvas — Client commission, personalized</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 3: AI EVALUATION ═══ -->
+  <section id="evaluation">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">AI Evaluation Experience</h2>
+    </div>
+    <p class="section-desc">
+      Active contributor to AI creative evaluation — writing tasks, producing reference deliverables,
+      and judging AI outputs against them with written rationales.
+    </p>
+
+    <div class="highlight-note">
+      I evaluate AI creative output the way I approach my own: with specific criteria, clear standards,
+      and the ability to explain exactly why one piece works and another doesn't — down to composition,
+      typographic decisions, color relationships, and craft-level execution.
+    </div>
+
+    <div class="eval-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 16px;">
+      <div class="eval-card">
+        <h3>Project Atlas</h3>
+        <div class="role-pill">Builder QC</div>
+        <p>
+          Data science document quality control. Performed build-phase QC on a large-scale
+          data science content library — verifying documents against specs, registries,
+          and known-issue anchors.
+        </p>
+        <ul class="eval-list">
+          <li>Pre-flight checks against document and threshold registries</li>
+          <li>Cross-referencing entity and known-issue records</li>
+          <li>Structured QC reporting with pass/fail rationale</li>
+          <li>High-volume, zero-error-tolerance production workflow</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <h3>Project Vision</h3>
+        <div class="role-pill">Rater → Reviewer</div>
+        <p>
+          AI creative output evaluation. Began as a task writer and rater; promoted to
+          reviewer after passing assessment. Reviewed other raters' scores and wrote
+          structured domain expert feedback.
+        </p>
+        <ul class="eval-list">
+          <li>Scoring AI outputs against domain expert rubrics (E1–E12)</li>
+          <li>Writing reviewer feedback on rater-scored pairs</li>
+          <li>Applying and auditing rubric criteria for correctness</li>
+          <li>Promoted from rater to reviewer track</li>
+        </ul>
+      </div>
+    </div>
+    <div class="eval-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="eval-card">
+        <h3>Project Open World</h3>
+        <div class="role-pill">Video Annotator</div>
+        <p>
+          Shot-by-shot video and film annotation. Tagged scenes with structured metadata
+          across characters, composition, action, and dialogue — building training data
+          for video understanding models.
+        </p>
+        <ul class="eval-list">
+          <li>Per-shot character and scene annotation</li>
+          <li>Action &amp; dialogue transcription and tagging</li>
+          <li>Composition and framing analysis</li>
+          <li>Applying precise annotation rules at scale</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <h3>Project One Take</h3>
+        <div class="role-pill">Video Annotator</div>
+        <p>
+          Film annotation project focused on granular shot analysis. Applied
+          Glowstone annotation standards for character visibility, scene composition,
+          and action classification across a large video corpus.
+        </p>
+        <ul class="eval-list">
+          <li>Character visibility and framing classification</li>
+          <li>Structured per-shot metadata tagging</li>
+          <li>Applying Glowstone annotation standards</li>
+          <li>Annotation quality review and correction</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tools-label" style="margin-top: 40px;">Tools &amp; Platforms</div>
+    <div class="tools-row">
+      <span class="tool-chip">Adobe Photoshop</span>
+      <span class="tool-chip">Adobe Illustrator</span>
+      <span class="tool-chip">Adobe Creative Cloud</span>
+      <span class="tool-chip">Figma</span>
+      <span class="tool-chip">DaVinci Resolve</span>
+      <span class="tool-chip">Canva</span>
+      <span class="tool-chip">Kittl</span>
+      <span class="tool-chip">Photopea</span>
+      <span class="tool-chip">Shopify</span>
+      <span class="tool-chip">Printify</span>
+      <span class="tool-chip">Etsy</span>
+      <span class="tool-chip">Acrylic / Traditional Media</span>
+      <span class="tool-chip">Pen &amp; Ink Illustration</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>Meri Caldwell — Creative Portfolio 2026</span>
+    <span><em>Design is how you explain what you think.</em></span>
+  </footer>
+
+</body>
+</html>
